@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register</title>
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background: #f8f9fa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .register-box {
+      background: #ffffff;
+      padding: 40px 50px;
+      border-radius: 16px;
+      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
+      width: 420px;
+      text-align: center;
+    }
+
+    .register-box h2 {
+      margin-bottom: 25px;
+      color: #333;
+    }
+
+    .image-upload {
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .image-upload img {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #ddd;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .image-upload img:hover {
+      opacity: 0.8;
+    }
+
+    .register-box input,
+    .register-box textarea {
+      width: 100%;
+      padding: 12px 14px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 15px;
+      outline: none;
+    }
+
+    textarea {
+      resize: none;
+      height: 70px;
+    }
+
+    .register-box button {
+      width: 100%;
+      background: #007bff;
+      border: none;
+      color: white;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background 0.3s ease;
+    }
+
+    .register-box button:hover {
+      background: #0056b3;
+    }
+
+    .login-link {
+      margin-top: 15px;
+      display: block;
+      color: #007bff;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .login-link:hover {
+      text-decoration: underline;
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="register-box">
+    <h2>Create Account</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+    <div class="image-upload">
+      <label for="file-input">
+        <img id="profilePreview" src="https://via.placeholder.com/110x110?text=+" alt="Profile Picture" />
+      </label>
+      <input id="file-input" type="file" name="ProfilePic" accept="image/*" onchange="previewImage(event)" />
+    </div>
+
+      <input type="text" name="Name" placeholder="Full Name" required />
+      
+      <!-- Phone field with HTML pattern -->
+      <input 
+        type="tel" 
+        name="Phone" 
+        placeholder="Phone Number" 
+        pattern="[6-9]{1}[0-9]{9}" 
+        title="Phone number must start with 6, 7, 8, or 9 and be exactly 10 digits." 
+        required 
+      />
+
+      <input type="email" name="Email" placeholder="Email Address" required />
+      <textarea placeholder="Address" name="Address" required></textarea>
+      <input type="password" placeholder="Password" name="Password" required />
+      <button type="submit">Register</button>
+    </form>
+
+    <a href="/" class="login-link">Already have an account? Login</a>
+  </div>
+
+  <script>
+    function previewImage(event) {
+      const image = document.getElementById('profilePreview');
+      image.src = URL.createObjectURL(event.target.files[0]);
+    }
+  </script>
+</body>
+</html>

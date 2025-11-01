@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TransFleet Pro | Secure Login</title>
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      min-height: 100vh;
+      overflow: hidden; /* Prevents scrolling */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0;
+      margin: 0;
+    }
+
+    .login-container {
+      background: #ffffff;
+      border-radius: 14px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      border: 1px solid #e0e0e0;
+      width: 100%;
+      max-width: 380px;
+      padding: 1.8rem 2rem;
+    }
+
+    .logo-container {
+      text-align: center;
+      margin-bottom: 1.3rem;
+    }
+
+    .truck-icon {
+      font-size: 2.8rem;
+      color: #1e40af;
+      margin-bottom: 0.3rem;
+    }
+
+    .company-name {
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: #1e293b;
+      margin: 0;
+    }
+
+    .tagline {
+      color: #64748b;
+      font-size: 0.85rem;
+      margin-top: 0.1rem;
+    }
+
+    .form-control {
+      border-radius: 8px;
+      padding: 0.65rem 0.9rem;
+      font-size: 0.95rem;
+      border: 1.4px solid #cbd5e1;
+      transition: all 0.3s ease;
+    }
+
+    .form-control:focus {
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+    }
+
+    .btn-login {
+      background: linear-gradient(to right, #1e40af, #3b82f6);
+      border: none;
+      border-radius: 8px;
+      padding: 0.65rem;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+
+    .btn-login:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(59, 130, 246, 0.25);
+    }
+
+    .input-group-text {
+      background-color: #f1f5f9;
+      border: 1.4px solid #cbd5e1;
+      border-right: none;
+      border-radius: 8px 0 0 8px;
+      color: #64748b;
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      color: #94a3b8;
+      font-size: 0.8rem;
+      margin: 1rem 0;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: '';
+      flex: 1;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .divider::before {
+      margin-right: 0.6rem;
+    }
+
+    .divider::after {
+      margin-left: 0.6rem;
+    }
+
+    .secure-badge {
+      font-size: 0.75rem;
+      color: #10b981;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.3rem;
+      margin-top: 0.8rem;
+    }
+
+    .footer {
+      text-align: center;
+      color: #6b7280;
+      font-size: 0.75rem;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <div class="logo-container">
+      <i class="fas fa-truck truck-icon"></i>
+      <h1 class="company-name">TransFleet Pro</h1>
+      <p class="tagline">Secure Fleet Management Portal</p>
+    </div>
+
+    <form id="loginForm" method="post">
+        {% csrf_token %}
+      <div class="mb-3">
+        <label for="email" class="form-label fw-semibold text-dark">Email Address</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+          <input type="email" class="form-control" id="email" name="Username" placeholder="fleet@company.com" required />
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="password" class="form-label fw-semibold text-dark">Password</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="fas fa-lock"></i></span>
+          <input type="password" class="form-control" id="password" name="Password" placeholder="Enter your password" required />
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="rememberMe" />
+          <label class="form-check-label text-muted" for="rememberMe">Remember me</label>
+        </div>
+        <a href="#" class="text-decoration-none text-primary fw-medium">Forgot Password?</a>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-login text-white">
+        <i class="fas fa-sign-in-alt me-2"></i> Secure Login
+      </button>
+
+      <div class="secure-badge">
+        <i class="fas fa-shield-alt"></i>
+        <span>256-bit SSL Encrypted</span>
+      </div>
+
+      <div class="divider">or</div>
+
+      <p class="text-center text-muted small mb-0">
+        New user? 
+        <a href="/OwnerApp/register" class="text-primary fw-medium text-decoration-none">Register here</a>
+      </p>
+    </form>
+
+    <div class="footer">
+      &copy; 2025 TransFleet Pro. All rights reserved.
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
