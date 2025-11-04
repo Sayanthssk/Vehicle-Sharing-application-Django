@@ -32,3 +32,25 @@ class BusModel(models.Model):
     Departure = models.TimeField(null=True, blank=True)
     Arrival = models.TimeField(null=True, blank=True)
     Img = models.ImageField(upload_to='busimage/', null=True, blank=True)
+
+
+
+class UserModel(models.Model):
+    LOGINID = models.ForeignKey(LoginModel, on_delete=models.CASCADE, null=True, blank=True)
+    fullName = models.CharField(max_length=100, null=True, blank=True)
+    Phone = models.BigIntegerField(null=True, blank=True)
+    Email = models.EmailField(null=True, blank=True)
+    Address = models.TextField(null=True, blank=True)
+    latitude = models.FloatField(null=True, blank=True)
+    longitude = models.FloatField(null=True, blank=True)
+
+
+class FeedBackModel(models.Model):
+    USERID = models.ForeignKey(UserModel, on_delete=models.CASCADE, null=True, blank=True)
+    Feedback = models.TextField(null=True, blank=True)
+    rating = models.IntegerField(null=True, blank=True)
+
+class ComplaintModel(models.Model):
+    USERID = models.ForeignKey(UserModel, on_delete=models.CASCADE, null=True, blank=True)
+    complaint = models.TextField(null=True, blank=True)
+    reply = models.TextField(max_length=100, null=True, blank=True)

@@ -16,3 +16,4 @@ class RegisterView(View):
             reg.LoginId = owner
             reg.save()
             return redirect('/')
+        

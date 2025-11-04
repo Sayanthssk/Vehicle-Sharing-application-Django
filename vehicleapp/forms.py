@@ -12,3 +12,9 @@ class BusForm(ModelForm):
     class Meta:
         model = BusModel
         fields = '__all__'
+
+
+class ReplyForm(ModelForm):
+    class Meta:
+        model = ComplaintModel
+        fields = '__all__'

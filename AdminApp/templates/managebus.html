@@ -56,6 +56,7 @@
       border-top-right-radius: 16px;
       height: 160px;
       object-fit: cover;
+      width: 100%;
     }
 
     .card-body h5 {
@@ -75,7 +76,6 @@
       padding: 5px 15px;
     }
 
-    /* Modal */
     .modal-content {
       border-radius: 16px;
       border: none;
@@ -103,17 +103,6 @@
     .modal-footer {
       border: none;
     }
-
-    .empty-state {
-      text-align: center;
-      padding: 80px 20px;
-      color: #777;
-    }
-
-    .empty-state img {
-      width: 180px;
-      opacity: 0.7;
-    }
   </style>
 </head>
 <body>
@@ -125,25 +114,29 @@
   </div>
 
   <!-- Bus Cards -->
-  <div class="container mt-3 mb-5">
+  <div class="container mt-4 mb-5">
     <div class="row g-4">
-
-      <!-- Example Card -->
-       {% for i in c %}
+      {% for i in c %}
       <div class="col-md-4 col-lg-3">
         <div class="card">
-          <img src="{{i.Img.url}}" alt="Bus Image">
+          <img src="{{ i.Img.url }}" alt="Bus Image">
           <div class="card-body">
-            <h5>{{i.Bus_name}}</h5>
+            <h5>{{ i.Bus_name }}</h5>
             <p><strong>Bus No:</strong> {{ i.Bus_no }}</p>
             <p><strong>Route:</strong> {{ i.Source }} → {{ i.Destination }}</p>
             <p><strong>Departure:</strong> {{ i.Departure }}</p>
             <p><strong>Arrival:</strong> {{ i.Arrival }}</p>
-            <button class="btn btn-danger btn-sm mt-2">Delete</button>
+            <p><strong>Latitude:</strong> {{ i.Latitude }}</p>
+            <p><strong>Longitude:</strong> {{ i.Longitude }}</p>
+            <button class="btn btn-danger btn-sm mt-2" onclick="window.location='/AdminApp/deletebus/{{ i.id }}'">Delete</button>
           </div>
         </div>
-        {% endfor %}
       </div>
+      {% empty %}
+      <div class="text-center py-5">
+        <p class="text-muted">No buses found. Click "Add Bus" to add one!</p>
+      </div>
+      {% endfor %}
     </div>
   </div>
 
@@ -152,7 +145,7 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
+          {% csrf_token %}
           <div class="modal-header">
             <h5 class="modal-title fw-bold" id="addBusModalLabel">Add New Bus</h5>
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -161,32 +154,32 @@
           <div class="modal-body">
             <div class="mb-3">
               <label class="form-label">Bus Name</label>
-              <input type="text" class="form-control" name="Bus_name" placeholder="Enter Bus Name" required>
+              <input type="text" class="form-control" name="Bus_name" required>
             </div>
 
             <div class="mb-3">
               <label class="form-label">Bus Number</label>
-              <input type="text" class="form-control" name="Bus_no" placeholder="Enter Bus Number" required>
-            </div>
-
-
-            <div class="mb-3">
-              <label class="form-label">Source</label>
-              <input type="text" class="form-control" name="Source" placeholder="Enter Source" required>
-            </div>
-
-            <div class="mb-3">
-              <label class="form-label">Destination</label>
-              <input type="text" class="form-control" name="Destination" placeholder="Enter Destination" required>
+              <input type="text" class="form-control" name="Bus_no" required>
             </div>
 
             <div class="row">
               <div class="col-md-6 mb-3">
-                <label class="form-label">Departure Time</label>
+                <label class="form-label">Source</label>
+                <input type="text" class="form-control" name="Source" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Destination</label>
+                <input type="text" class="form-control" name="Destination" required>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Departure</label>
                 <input type="time" class="form-control" name="Departure" required>
               </div>
               <div class="col-md-6 mb-3">
-                <label class="form-label">Arrival Time</label>
+                <label class="form-label">Arrival</label>
                 <input type="time" class="form-control" name="Arrival" required>
               </div>
             </div>
