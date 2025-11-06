@@ -17,3 +17,11 @@ class RegisterView(View):
             reg.save()
             return redirect('/')
         
+class OwnerDash(View):
+    def get(self, request):
+        c = OwnerModel.objects.get(LoginId__id = request.session['user_id'])
+        return render(request, 'home.html', {'c':c})
+
+class ManageVehicle(View):
+    def get(self, request):
+        return render(request, 'viewvehicle.html')

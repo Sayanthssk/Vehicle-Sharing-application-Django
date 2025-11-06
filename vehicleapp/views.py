@@ -17,6 +17,8 @@ class LoginView(View):
             request.session['user_id'] = login_obj.id
             if login_obj.UserType == 'admin':
                 return HttpResponse('''<script>alert('Welcome Back !!!');window.location='/AdminApp/adminhome'</script>''')
+            elif login_obj.UserType == 'Owner':
+                return HttpResponse('''<script>alert('Welcome Back !!!');window.location='/OwnerApp/home'</script>''')
             else:
                 return HttpResponse('''<script>alert('invalid User !!!'); window.location='/'</script>''')
         except LoginModel.DoesNotExist:

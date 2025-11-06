@@ -54,3 +54,17 @@ class ComplaintModel(models.Model):
     USERID = models.ForeignKey(UserModel, on_delete=models.CASCADE, null=True, blank=True)
     complaint = models.TextField(null=True, blank=True)
     reply = models.TextField(max_length=100, null=True, blank=True)
+
+
+
+class VehicleModel(models.Model):
+    OWNERID = models.ForeignKey(OwnerModel, on_delete=models.CASCADE, null=True, blank=True)
+    Vehicle_no = models.CharField(max_length=100, null=True, blank=True)
+    Vehicle_Type = models.CharField(max_length=100, null=True, blank=True)
+    seat_capacity = models.IntegerField(null=True, blank=True)
+    Source = models.CharField(max_length=100, null=True, blank=True)
+    Destination = models.CharField(max_length=100, null=True, blank=True)
+    latitude = models.FloatField(null=True, blank=True)
+    longitude = models.FloatField(null=True, blank=True)
+    LOGINID = models.ForeignKey(LoginModel, on_delete=models.CASCADE, null=True, blank=True)
+    Img = models.ImageField(upload_to='cabimage/', null=True, blank=True)

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Vehicle</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .form-container {
+      max-width: 800px;
+      margin: 60px auto;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+      background: #fff;
+    }
+
+    h2 {
+      text-align: center;
+      font-weight: 700;
+      margin-bottom: 30px;
+      color: #333;
+    }
+
+    .form-label {
+      font-weight: 600;
+      color: #555;
+    }
+
+    .btn-submit {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #fff;
+      border: none;
+      border-radius: 30px;
+      padding: 10px 25px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+
+    .btn-submit:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-container">
+    <h2>Add Vehicle</h2>
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+
+      <!-- Row 1: Username and Password -->
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label for="username" class="form-label">Username</label>
+          <input type="text" class="form-control" id="username" name="username" placeholder="Enter username" required>
+        </div>
+        <div class="col-md-6">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" required>
+        </div>
+      </div>
+
+      <!-- Row 2: Vehicle Number and Type -->
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label for="Vehicle_no" class="form-label">Vehicle Number</label>
+          <input type="text" class="form-control" id="Vehicle_no" name="Vehicle_no" placeholder="Enter vehicle number" required>
+        </div>
+        <div class="col-md-6">
+          <label for="Vehicle_Type" class="form-label">Vehicle Type</label>
+          <input type="text" class="form-control" id="Vehicle_Type" name="Vehicle_Type" placeholder="Enter vehicle type (e.g., Car, Van, Bus)" required>
+        </div>
+      </div>
+
+      <!-- Row 3: Seat Capacity and Image -->
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label for="seat_capacity" class="form-label">Seat Capacity</label>
+          <input type="number" class="form-control" id="seat_capacity" name="seat_capacity" placeholder="Enter seat capacity" required>
+        </div>
+        <div class="col-md-6">
+          <label for="Img" class="form-label">Vehicle Image</label>
+          <input type="file" class="form-control" id="Img" name="Img" accept="image/*" required>
+        </div>
+      </div>
+
+      <!-- Row 4: Source and Destination -->
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label for="Source" class="form-label">Source</label>
+          <input type="text" class="form-control" id="Source" name="Source" placeholder="Enter starting location" required>
+        </div>
+        <div class="col-md-6">
+          <label for="Destination" class="form-label">Destination</label>
+          <input type="text" class="form-control" id="Destination" name="Destination" placeholder="Enter destination" required>
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="text-center mt-4">
+        <button type="submit" class="btn-submit">Add Vehicle</button>
+      </div>
+    </form>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

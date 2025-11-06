@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-al!a_ie4pk2pm)sgbw3mh6ad$q3v*5-!3i&3%p%1!o5i-w*0ew
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'vehicleapp',
     'AdminApp',
     'UserApp',
-    'OwnerApp'
+    'OwnerApp',
+    "rest_framework"
 ]
 
 MIDDLEWARE = [
