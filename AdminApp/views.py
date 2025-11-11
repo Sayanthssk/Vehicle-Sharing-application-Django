@@ -56,3 +56,5 @@ class ReplyView(View):
         if reply.is_valid():
             reply.save()
             return redirect('/AdminApp/complaints')
+        else:
+            print(reply.errors)

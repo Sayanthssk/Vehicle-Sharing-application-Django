@@ -68,3 +68,9 @@ class VehicleModel(models.Model):
     longitude = models.FloatField(null=True, blank=True)
     LOGINID = models.ForeignKey(LoginModel, on_delete=models.CASCADE, null=True, blank=True)
     Img = models.ImageField(upload_to='cabimage/', null=True, blank=True)
+
+class BookingCabModel(models.Model):
+    VEHICLEID = models.ForeignKey(VehicleModel, on_delete=models.CASCADE, null=True, blank=True)
+    USERID = models.ForeignKey(UserModel, on_delete=models.CASCADE, null=True, blank=True)
+    bookingdate = models.DateField(auto_now_add=True, null=True, blank=True)
+    status = models.CharField(max_length=100, null=True, blank=True)

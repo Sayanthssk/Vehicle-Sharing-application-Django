@@ -121,21 +121,21 @@
   <!-- Vehicle Cards -->
   <div class="container mt-4 mb-5">
     <div class="row g-4">
-      {% for i in vehicles %}
+      {% for i in c %}
       <div class="col-md-4 col-lg-3">
         <div class="card">
-          <img src="{{ i.image.url }}" alt="Vehicle Image">
+          <img src="{{ i.Img.url }}" alt="Vehicle Image">
           <div class="card-body">
-            <h5>{{ i.name }}</h5>
-            <p><strong>Vehicle No:</strong> {{ i.number }}</p>
-            <p><strong>Type:</strong> {{ i.type }}</p>
-            <p><strong>Model:</strong> {{ i.model }}</p>
-            <p><strong>Capacity:</strong> {{ i.capacity }}</p>
-            <p><strong>Status:</strong> {{ i.status }}</p>
+            <h5>{{ i.LOGINID.Username }}</h5>
+            <p><strong>Vehicle No:</strong> {{ i.Vehicle_no }}</p>
+            <p><strong>Type:</strong> {{ i.Vehicle_Type }}</p>
+            <p><strong>Capacity:</strong> {{ i.seat_capacity }}</p>
+            <p><strong>Source:</strong> {{ i.Source }}</p>
+            <p><strong>Destination:</strong> {{ i.Destination }}</p>
 
             <div class="btn-group">
-              <a href="{% url 'edit_vehicle' i.id %}" class="btn-edit">Edit</a>
-              <a href="{% url 'delete_vehicle' i.id %}" class="btn-delete" onclick="return confirm('Are you sure you want to delete this vehicle?');">Delete</a>
+              <a href="/OwnerApp/editvehicle/{{i.id}}" class="btn-edit">Edit</a>
+              <a href="/OwnerApp/deletevehicle/{{i.LOGINID.id}}" class="btn-delete" onclick="return confirm('Are you sure you want to delete this vehicle?');">Delete</a>
             </div>
           </div>
         </div>
@@ -149,7 +149,7 @@
   </div>
 
   <!-- Floating Add Button -->
-  <a href="#" class="floating-add-btn">+</a>
+  <a href="/OwnerApp/addvehicle" class="floating-add-btn">+</a>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

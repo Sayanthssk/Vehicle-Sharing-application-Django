@@ -17,4 +17,9 @@ class BusForm(ModelForm):
 class ReplyForm(ModelForm):
     class Meta:
         model = ComplaintModel
-        fields = '__all__'
+        fields = ['reply']
+
+class VehicleForm(ModelForm):
+    class Meta:
+        model = VehicleModel
+        fields = "__all__"

@@ -96,35 +96,65 @@
     input[type="file"] {
       display: none;
     }
+
+    .error {
+      color: red;
+      font-size: 13px;
+      margin-top: -5px;
+      text-align: left;
+    }
   </style>
 </head>
 <body>
   <div class="register-box">
     <h2>Create Account</h2>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-    <div class="image-upload">
-      <label for="file-input">
-        <img id="profilePreview" src="https://via.placeholder.com/110x110?text=+" alt="Profile Picture" />
-      </label>
-      <input id="file-input" type="file" name="ProfilePic" accept="image/*" onchange="previewImage(event)" />
-    </div>
+    <form method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
+      {% csrf_token %}
+      <div class="image-upload">
+        <label for="file-input">
+          <img id="profilePreview" src="https://via.placeholder.com/110x110?text=+" alt="Profile Picture" />
+        </label>
+        <input id="file-input" type="file" name="ProfilePic" accept="image/*" onchange="previewImage(event)" />
+      </div>
 
-      <input type="text" name="Name" placeholder="Full Name" required />
-      
-      <!-- Phone field with HTML pattern -->
+      <input type="text" id="name" name="Name" placeholder="Full Name" required />
+
+      <!-- Phone validation -->
       <input 
-        type="tel" 
-        name="Phone" 
-        placeholder="Phone Number" 
-        pattern="[6-9]{1}[0-9]{9}" 
-        title="Phone number must start with 6, 7, 8, or 9 and be exactly 10 digits." 
+        type="tel"
+        id="phone"
+        name="Phone"
+        placeholder="Phone Number"
+        pattern="[6-9]{1}[0-9]{9}"
+        title="Phone number must start with 6, 7, 8, or 9 and be exactly 10 digits."
+        required
+      />
+      <div id="phoneError" class="error"></div>
+
+      <!-- Email validation -->
+      <input 
+        type="email" 
+        id="email"
+        name="Email" 
+        placeholder="Email Address" 
         required 
       />
+      <div id="emailError" class="error"></div>
 
-      <input type="email" name="Email" placeholder="Email Address" required />
       <textarea placeholder="Address" name="Address" required></textarea>
-      <input type="password" placeholder="Password" name="Password" required />
+
+      <!-- Password validation -->
+      <input 
+        type="password" 
+        id="password"
+        placeholder="Password" 
+        name="Password" 
+        minlength="8"
+        title="Password must be at least 8 characters long."
+        required 
+      />
+      <div id="passwordError" class="error"></div>
+
       <button type="submit">Register</button>
     </form>
 
@@ -135,6 +165,42 @@
     function previewImage(event) {
       const image = document.getElementById('profilePreview');
       image.src = URL.createObjectURL(event.target.files[0]);
+    }
+
+    function validateForm() {
+      let isValid = true;
+
+      // Reset errors
+      document.getElementById("phoneError").textContent = "";
+      document.getElementById("emailError").textContent = "";
+      document.getElementById("passwordError").textContent = "";
+
+      // Validate phone
+      const phone = document.getElementById("phone").value;
+      const phonePattern = /^[6-9]\d{9}$/;
+      if (!phonePattern.test(phone)) {
+        document.getElementById("phoneError").textContent =
+          "Phone number must start with 6, 7, 8, or 9 and be exactly 10 digits.";
+        isValid = false;
+      }
+
+      // Validate email
+      const email = document.getElementById("email").value;
+      const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      if (!emailPattern.test(email)) {
+        document.getElementById("emailError").textContent = "Enter a valid email address.";
+        isValid = false;
+      }
+
+      // Validate password
+      const password = document.getElementById("password").value;
+      if (password.length < 8) {
+        document.getElementById("passwordError").textContent =
+          "Password must be at least 8 characters long.";
+        isValid = false;
+      }
+
+      return isValid;
     }
   </script>
 </body>

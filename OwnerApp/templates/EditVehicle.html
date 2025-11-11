@@ -47,36 +47,27 @@
 <body>
 
   <div class="form-container">
-    <h2>Add Vehicle</h2>
+    <h2>Update Vehicle</h2>
     <form method="POST" enctype="multipart/form-data">
       {% csrf_token %}
 
       <!-- Row 1: Username and Password -->
-      <div class="row mb-3">
-        <div class="col-md-6">
-          <label for="username" class="form-label">Username</label>
-          <input type="text" class="form-control" id="username" name="username" placeholder="Enter username" required>
-        </div>
-        <div class="col-md-6">
-          <label for="password" class="form-label">Password</label>
-          <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" required>
-        </div>
-      </div>
+      
 
       <!-- Row 2: Vehicle Number and Type -->
       <div class="row mb-3">
         <div class="col-md-6">
           <label for="Vehicle_no" class="form-label">Vehicle Number</label>
-          <input type="text" class="form-control" id="Vehicle_no" name="Vehicle_no" placeholder="Enter vehicle number" required>
+          <input type="text" class="form-control" id="Vehicle_no" name="Vehicle_no" value="{{c.Vehicle_no}}">
         </div>
         <div class="col-md-6">
           <label for="Vehicle_Type" class="form-label">Vehicle Type</label>
-          <select class="form-select" id="Vehicle_Type" name="Vehicle_Type" required>
+          <select class="form-select" id="Vehicle_Type" name="Vehicle_Type" >
             <option value="">Select vehicle type</option>
-            <option value="Car">Car</option>
-            <option value="Van">Van</option>
-            <option value="Auto">Auto</option>
-            <option value="Bike">Bike</option>
+            <option value="Car" {% if c.Vehicle_Type == "Car" %} selected {% endif %}>Car</option>
+            <option value="Van" {% if c.Vehicle_Type == "Van" %} selected {% endif %}>Van</option>
+            <option value="Auto" {% if c.Vehicle_Type == "Auto" %} selected {% endif %}>Auto</option>
+            <option value="Bike" {% if c.Vehicle_Type == "Bike" %} selected {% endif %},>Bike</option>
             <option value="Tempo-Traveller">Tempo Traveller</option>
           </select>
         </div>
@@ -86,11 +77,11 @@
       <div class="row mb-3">
         <div class="col-md-6">
           <label for="seat_capacity" class="form-label">Seat Capacity</label>
-          <input type="number" class="form-control" id="seat_capacity" name="seat_capacity" placeholder="Enter seat capacity" required>
+          <input type="number" class="form-control" id="seat_capacity" name="seat_capacity" placeholder="Enter seat capacity" >
         </div>
         <div class="col-md-6">
           <label for="Img" class="form-label">Vehicle Image</label>
-          <input type="file" class="form-control" id="Img" name="Img" accept="image/*" required>
+          <input type="file" class="form-control" id="Img" name="Img" accept="image/*" >
         </div>
       </div>
 
@@ -98,17 +89,17 @@
       <div class="row mb-3">
         <div class="col-md-6">
           <label for="Source" class="form-label">Source</label>
-          <input type="text" class="form-control" id="Source" name="Source" placeholder="Enter starting location" required>
+          <input type="text" class="form-control" id="Source" name="Source" placeholder="Enter starting location" >
         </div>
         <div class="col-md-6">
           <label for="Destination" class="form-label">Destination</label>
-          <input type="text" class="form-control" id="Destination" name="Destination" placeholder="Enter destination" required>
+          <input type="text" class="form-control" id="Destination" name="Destination" placeholder="Enter destination" >
         </div>
       </div>
 
       <!-- Submit Button -->
       <div class="text-center mt-4">
-        <button type="submit" class="btn-submit">Add Vehicle</button>
+        <button type="submit" class="btn-submit">Edit Vehicle</button>
       </div>
     </form>
   </div>

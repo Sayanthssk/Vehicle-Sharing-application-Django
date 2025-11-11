@@ -23,3 +23,8 @@ class LoginView(View):
                 return HttpResponse('''<script>alert('invalid User !!!'); window.location='/'</script>''')
         except LoginModel.DoesNotExist:
             return HttpResponse('''<script>alert('Invalid credentials !!!');window.location='/'</script>''')
+        
+
+class LogoutView(View):
+    def get(self, request):
+        return HttpResponse('''<script>alert('Logout SuccessFully');window.location='/'</script>''')
